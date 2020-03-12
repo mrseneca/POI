@@ -11,9 +11,9 @@ import java.util.Iterator;
 
 public class LeksintuV1Converter {
     public static void main(String[] args) throws IOException {
-        int objectid = 59595;
-        int classifierid = 59595;
-        int classifieritemid = 2299893;
+        int objectid = 59592;
+        int classifierid = 59592;
+        int classifieritemid = 2299372;
 
         FileWriter writer = new FileWriter("/home/user/Downloads/Project/Leksintu1.sql");
 

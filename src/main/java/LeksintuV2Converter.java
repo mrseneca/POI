@@ -15,10 +15,10 @@ import java.util.Iterator;
 
 public class LeksintuV2Converter {
     public static void main(String[] args) throws IOException {
-        int objectid = 59596;
-        int classifierid = 59596;
-        int classifierattributeid = 869;
-        int classifieritemid = 2301343;
+        int objectid = 59593;
+        int classifierid = 59593;
+        int classifierattributeid = 860;
+        int classifieritemid = 2300822;
 
         FileWriter writer = new FileWriter("/home/user/Downloads/Project/Leksintu2.sql");
 
