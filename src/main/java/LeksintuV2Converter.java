@@ -15,16 +15,16 @@ import java.util.Iterator;
 
 public class LeksintuV2Converter {
     public static void main(String[] args) throws IOException {
-        int objectid = 59593;
-        int classifierid = 59593;
+        int objectid = 59594;
+        int classifierid = 59594;
         int classifierattributeid = 860;
-        int classifieritemid = 2300822;
+        int classifieritemid = 2311713;
 
         FileWriter writer = new FileWriter("/home/user/Downloads/Project/Leksintu2.sql");
 
-        FileInputStream stream = new FileInputStream(new File("/home/user/Downloads/Project/Leksintu2.xlsx"));
-        XSSFWorkbook workbook = new XSSFWorkbook(stream);
-        XSSFSheet sheet = workbook.getSheetAt(1);
+        FileInputStream stream = new FileInputStream(new File("/home/user/Downloads/Project/Leksintu2.xls"));
+        HSSFWorkbook workbook = new HSSFWorkbook(stream);
+        HSSFSheet sheet = workbook.getSheetAt(1);
 
         writer.write("insert into object (objectid,name,categoryid,isdeleted) values ("+objectid+",'Предметный указатель товаров и услуг (ЛЕКСИНТУ Часть 2)', 1, false);\n");
         writer.write("\n");
@@ -54,7 +54,7 @@ public class LeksintuV2Converter {
             } else if (row.getCell(0).getCellType() == CellType.NUMERIC) {
                 parents.put(String.valueOf(row.getCell(0).getNumericCellValue()), classifieritemid);
             } else if (row.getCell(0).getCellType() == CellType.FORMULA) {
-                parents.put(String.valueOf(row.getCell(0).getCachedFormulaResultType()), classifieritemid);
+                parents.put(row.getCell(0).getStringCellValue(), classifieritemid);
             }
 
             if(row.getCell(4) ==null) {
@@ -70,7 +70,7 @@ public class LeksintuV2Converter {
                                     String.valueOf(row.getCell(1).getCachedFormulaResultType()))).replaceAll("'","''")+"', '"+
                     (row.getCell(0).getCellType() == CellType.STRING ? row.getCell(0).getStringCellValue() :
                             (row.getCell(0).getCellType() == CellType.NUMERIC ? String.valueOf(row.getCell(0).getNumericCellValue()) :
-                                    String.valueOf(row.getCell(0).getCachedFormulaResultType())))+"');\n");
+                                    row.getCell(0).getStringCellValue()))+"');\n");
 
             for (int i = 0; i <2; i++) {
                 writer.write("insert into classifieritemattributevalue (classifierattributeid,classifieritemid,textvalue) values ("+(classifierattributeid+i)+", "+classifieritemid+", "+((row.getCell(i+2) == null) ? "null" : "'"+row.getCell(i+2).getStringCellValue().replaceAll("'","''")+"'")+");\n");
