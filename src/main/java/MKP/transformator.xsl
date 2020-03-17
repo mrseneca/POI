@@ -27,7 +27,7 @@
                 <td><xsl:value-of select="IpcEntry/@Symbol"/></td>
                 <td/>
                 <td><xsl:value-of select="IpcEntry/Title/text()"/></td>
-                <td><xsl:value-of select="IpcEntry/Title/@Edition"/></td>
+                <td><xsl:value-of select="IpcEntry/@Edition"/></td>
                 <td><xsl:value-of select="Header/Title/text()"/></td>
                 <td/>
                 <td/>
@@ -41,8 +41,8 @@
                     <td><xsl:value-of select="IpcEntry/@Symbol"/></td>
                     <td><xsl:value-of select="parent::node()/IpcEntry/@Symbol"/></td>
                     <td><xsl:value-of select="IpcEntry/Title/text()"/></td>
-                    <td><xsl:value-of select="IpcEntry/Title/@Edition"/></td>
-                    <td/>
+                    <td><xsl:value-of select="IpcEntry/@Edition"/></td>
+                    <td><xsl:value-of select="Header/Title/text()"/></td>
                     <td/>
                     <td/>
                     <td/>
@@ -55,8 +55,8 @@
                         <td><xsl:value-of select="IpcEntry/@Symbol"/></td>
                         <td><xsl:value-of select="parent::node()/IpcEntry/@Symbol"/></td>
                         <td><xsl:value-of select="IpcEntry/Title/text()"/></td>
-                        <td><xsl:value-of select="IpcEntry/Title/@Edition"/></td>
-                        <td/>
+                        <td><xsl:value-of select="IpcEntry/@Edition"/></td>
+                        <td><xsl:value-of select="Header/Title/text()"/></td>
                         <td/>
                         <td/>
                         <td/>
@@ -79,8 +79,8 @@
                             </td>
                             <td><xsl:value-of select="parent::node()/IpcEntry/@Symbol"/></td>
                             <td><xsl:value-of select="IpcEntry/Title/text()"/></td>
-                            <td><xsl:value-of select="IpcEntry/Title/@Edition"/></td>
-                            <td/>
+                            <td><xsl:value-of select="IpcEntry/@Edition"/></td>
+                            <td><xsl:value-of select="Header/Title/text()"/></td>
                             <td/>
                             <td/>
                             <td/>
@@ -94,8 +94,8 @@
                                 <td><xsl:value-of select="IpcEntry/@Symbol"/></td>
                                 <td><xsl:value-of select="parent::node()/IpcEntry/@Symbol"/></td>
                                 <td><xsl:value-of select="IpcEntry/Title/text()"/></td>
-                                <td><xsl:value-of select="IpcEntry/Title/@Edition"/></td>
-                                <td/>
+                                <td><xsl:value-of select="IpcEntry/@Edition"/></td>
+                                <td><xsl:value-of select="Header/Title/text()"/></td>
                                 <td/>
                                 <td/>
                                 <td/>
