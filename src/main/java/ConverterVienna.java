@@ -7,12 +7,12 @@ import java.util.*;
 
 public class ConverterVienna {
     public static void main(String[] args) throws IOException {
-        int objectid = 59592;
-        int classifierid = 59592;
-        int classifierattributeid = 857;
-        int classifieritemid = 2296943;
+        int objectid = 59601;
+        int classifierid = 59601;
+        int classifierattributeid = 868;
+        int classifieritemid = 2339945;
 
-        FileWriter writer = new FileWriter("/home/user/Downloads/Project/viennaV2.sql");
+        FileWriter writer = new FileWriter("/home/user/Downloads/Project/viennaV3.sql");
 
         FileInputStream stream = new FileInputStream(new File("/home/user/Downloads/Project/viena.xls"));
         HSSFWorkbook workbook = new HSSFWorkbook(stream);

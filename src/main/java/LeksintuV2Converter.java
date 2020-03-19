@@ -15,12 +15,12 @@ import java.util.Iterator;
 
 public class LeksintuV2Converter {
     public static void main(String[] args) throws IOException {
-        int objectid = 59594;
-        int classifierid = 59594;
-        int classifierattributeid = 860;
-        int classifieritemid = 2311713;
+        int objectid = 59602;
+        int classifierid = 59602;
+        int classifierattributeid = 871;
+        int classifieritemid = 2341853;
 
-        FileWriter writer = new FileWriter("/home/user/Downloads/Project/Leksintu2.sql");
+        FileWriter writer = new FileWriter("/home/user/Downloads/Project/Leksintu2V2.sql");
 
         FileInputStream stream = new FileInputStream(new File("/home/user/Downloads/Project/Leksintu2.xls"));
         HSSFWorkbook workbook = new HSSFWorkbook(stream);

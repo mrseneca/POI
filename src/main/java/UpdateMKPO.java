@@ -24,7 +24,7 @@ public class UpdateMKPO {
 
             row = rowIterator.next();
             if (row.getCell(1) != null) {
-                writer.write("update classifieritemattributevalue as cav set textvalue = '" + row.getCell(1).getStringCellValue() + "' from  public.classifieritem as ci WHERE ci.classifierid = 59595 and cav.classifierattributeid = 862 and ci.code = '" + row.getCell(0).getStringCellValue() + "' and ci.classifieritemid = cav.classifieritemid;");
+                writer.write("update classifieritemattributevalue as cav set textvalue = '" + row.getCell(1).getStringCellValue() + "' from  public.classifieritem as ci WHERE ci.classifierid = 59603 and cav.classifierattributeid = 873 and ci.code = '" + row.getCell(0).getStringCellValue() + "' and ci.classifieritemid = cav.classifieritemid;");
                 writer.write("\n");
             }
         }

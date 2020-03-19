@@ -11,12 +11,12 @@ import java.util.Iterator;
 
 public class OmkpConverter {
     public static void main(String[] args) throws IOException {
-        int objectid = 59595;
-        int classifierid = 59595;
-        int classifierattributeid = 862;
-        int classifieritemid = 2322604;
+        int objectid = 59603;
+        int classifierid = 59603;
+        int classifierattributeid = 873;
+        int classifieritemid = 2352745;
 
-        FileWriter writer = new FileWriter("/home/user/Downloads/Project/MKPO.sql");
+        FileWriter writer = new FileWriter("/home/user/Downloads/Project/MKPOV2.sql");
 
         FileInputStream stream = new FileInputStream(new File("/home/user/Downloads/Project/MKPO2.xlsx"));
         XSSFWorkbook workbook = new XSSFWorkbook(stream);
