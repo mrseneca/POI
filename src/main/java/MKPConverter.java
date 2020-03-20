@@ -12,10 +12,10 @@ import java.util.Iterator;
 
 public class MKPConverter {
     public static void main(String[] args) throws IOException {
-        int objectid = 59598;
-        int classifierid = 59598;
-        int classifierattributeid = 874;
-        int classifieritemid = 2317522;
+        int objectid = 59631;
+        int classifierid = 59631;
+        int classifierattributeid = 882;
+        int classifieritemid = 2358165;
 
         FileWriter writer = new FileWriter("/home/user/Downloads/Project/MKP.sql");
 
@@ -30,8 +30,10 @@ public class MKPConverter {
         writer.write("\n");
 
         String[] attributes_rus = {"Вид","Количество точек","Редакция","Версия","Назначение", "Уровень", "Заголовок","Примечание до","Примечание после","Содержание"};
+        int ctype;
         for (int i = 0; i < 10; i++) {
-            writer.write("insert into classifierattribute (classifierattributeid,classifierid,type,name,nameen,attributeorder) values ("+(classifierattributeid+i)+", "+classifierid+", 0, '"+attributes_rus[i]+"','"+attributes_rus[i]+"',"+(i+1)+");\n");
+            if (i==0||i==1||i==4||i==5) {ctype=1;} else {ctype=0;}
+            writer.write("insert into classifierattribute (classifierattributeid,classifierid,type,name,nameen,attributeorder) values ("+(classifierattributeid+i)+", "+classifierid+", "+ctype+", '"+attributes_rus[i]+"','"+attributes_rus[i]+"',"+(i+1)+");\n");
         }
         writer.write("\n");
 
@@ -43,6 +45,7 @@ public class MKPConverter {
 
         String parentId;
         String cellText;
+        String cellType;
 
         while (rowIterator.hasNext()) {
             row = rowIterator.next();
@@ -56,9 +59,10 @@ public class MKPConverter {
 
             writer.write("insert into classifieritem (classifieritemid,classifierid,parentclassifieritemid,name,code) values ("+classifieritemid+", "+classifierid+", "+parents.get(parentId)+", '"+row.getCell(2).getStringCellValue().replaceAll("'","''")+"', '"+row.getCell(0).getStringCellValue()+"');\n");
             for (int i = 0; i <10; i++) {
+                if (i==0||i==1||i==4||i==5) {cellType="numbervalue";} else {cellType="textvalue";}
 //                cellText = (row.getCell(i+3).getCellType() == CellType.STRING) ? (row.getCell(i+3) == null) ? "null" : "'"+row.getCell(i+3).getStringCellValue().replaceAll("'","''")+"'" : (row.getCell(i+3) == null) ? "null" : "'"+String.valueOf(row.getCell(i+3).getNumericCellValue())+"'";
-                cellText = (row.getCell(i+3)==null) ? "''" : (row.getCell(i+3).getCellType() == CellType.STRING ? "'"+row.getCell(i+3).getStringCellValue().replaceAll("'","''")+"'" : (row.getCell(i+3) == null) ? "null" : "'"+String.valueOf((int)row.getCell(i+3).getNumericCellValue())+"'");
-                writer.write("insert into classifieritemattributevalue (classifierattributeid,classifieritemid,textvalue) values ("+(classifierattributeid+i)+", "+classifieritemid+", "+cellText+");\n");
+                cellText = (row.getCell(i+3)==null) ? "''" : (row.getCell(i+3).getCellType() == CellType.STRING ? "'"+row.getCell(i+3).getStringCellValue().replaceAll("'","''")+"'" : (row.getCell(i+3) == null) ? "null" : String.valueOf((int)row.getCell(i+3).getNumericCellValue()));
+                writer.write("insert into classifieritemattributevalue (classifierattributeid,classifieritemid,"+cellType+") values ("+(classifierattributeid+i)+", "+classifieritemid+", "+cellText+");\n");
             }
             writer.write("\n");
 
