@@ -13,14 +13,14 @@ import java.util.Iterator;
 
 public class RPConverter {
     public static void main(String[] args) throws IOException {
-        int objectid = 59591;
-        int classifierid = 59591;
-        int classifierattributeid = 853;
-        int classifieritemid = 2298851;
+        int objectid = 59644;
+        int classifierid = 59644;
+        int classifierattributeid = 932;
+        int classifieritemid = 2443948;
 
-        FileWriter writer = new FileWriter("/home/user/Downloads/Project/RP/RP.sql");
+        FileWriter writer = new FileWriter("f:\\RP.sql");
 
-        FileInputStream stream = new FileInputStream(new File("/home/user/Downloads/Project/RP/Структура РП.xls"));
+        FileInputStream stream = new FileInputStream(new File("f:\\Структура РП.xls"));
         HSSFWorkbook workbook = new HSSFWorkbook(stream);
         HSSFSheet sheet = workbook.getSheetAt(0);
 

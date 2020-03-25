@@ -10,10 +10,10 @@ import java.util.Iterator;
 
 public class DWPI2Converter {
     public static void main(String[] args) throws IOException {
-        int objectid = 59591;
-        int classifierid = 59591;
-        int classifierattributeid = 853;
-        int classifieritemid = 2298851;
+        int objectid = 59648;
+        int classifierid = 59648;
+        int classifierattributeid = 943;
+        int classifieritemid = 2474020;
 
         FileWriter writer = new FileWriter("f:\\DWPI2.sql");
 

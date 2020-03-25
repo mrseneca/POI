@@ -12,14 +12,14 @@ import java.util.Iterator;
 
 public class OISConverter {
     public static void main(String[] args) throws IOException {
-        int objectid = 59591;
-        int classifierid = 59591;
-        int classifierattributeid = 853;
-        int classifieritemid = 2298851;
+        int objectid = 59645;
+        int classifierid = 59645;
+        int classifierattributeid = 933;
+        int classifieritemid = 2444075;
 
-        FileWriter writer = new FileWriter("/home/user/Downloads/Project/OIS/OIS.sql");
+        FileWriter writer = new FileWriter("f:\\OIS.sql");
 
-        FileInputStream stream = new FileInputStream(new File("/home/user/Downloads/Project/OIS/ОИС_к загрузке.xlsx"));
+        FileInputStream stream = new FileInputStream(new File("f:\\ОИС_к загрузке.xlsx"));
         XSSFWorkbook workbook = new XSSFWorkbook(stream);
         XSSFSheet sheet = workbook.getSheetAt(0);
 
@@ -60,7 +60,7 @@ public class OISConverter {
             writer.write("insert into classifieritem (classifieritemid,classifierid,parentclassifieritemid,name,code) values ("+classifieritemid+", "+classifierid+", "+parents.get(parentId)+", '"+row.getCell(1).getStringCellValue().replaceAll("'","''")+"', '"+row.getCell(0).getStringCellValue()+"');\n");
             for (int i = 0; i <2; i++) {
                 if (i==0) {cellType="numbervalue";} else {cellType="textvalue";}
-                cellText = (row.getCell(i+2)==null) ? "''" : (row.getCell(i+2).getCellType() == CellType.STRING ? "'"+row.getCell(i+2).getStringCellValue().replaceAll("'","''")+"'" : (row.getCell(i+2) == null) ? "null" : String.valueOf((int)row.getCell(i+2).getNumericCellValue()));
+                cellText = (row.getCell(i+2)==null) ? (i==0 ? "null" : "''") : (row.getCell(i+2).getCellType() == CellType.STRING ? "'"+row.getCell(i+2).getStringCellValue().replaceAll("'","''")+"'" : (row.getCell(i+2) == null) ? "null" : String.valueOf((int)row.getCell(i+2).getNumericCellValue()));
                 writer.write("insert into classifieritemattributevalue (classifierattributeid,classifieritemid,"+cellType+") values ("+(classifierattributeid+i)+", "+classifieritemid+", "+cellText+");\n");
             }
             writer.write("\n");

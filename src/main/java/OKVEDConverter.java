@@ -13,21 +13,21 @@ import java.util.Iterator;
 
 public class OKVEDConverter {
     public static void main(String[] args) throws IOException {
-        int objectid = 59591;
-        int classifierid = 59591;
-        int classifierattributeid = 853;
-        int classifieritemid = 2298851;
+        int objectid = 59646;
+        int classifierid = 59646;
+        int classifierattributeid = 935;
+        int classifieritemid = 2444316;
 
-        FileWriter writer = new FileWriter("/home/user/Downloads/Project/OKVED/OKVED.sql");
+        FileWriter writer = new FileWriter("f:\\OKVED.sql");
 
-        FileInputStream stream = new FileInputStream(new File("/home/user/Downloads/Project/OKVED/data-9749-2020-03-02_ к загрузке.xlsx"));
+        FileInputStream stream = new FileInputStream(new File("f:\\data-9749-2020-03-02_ к загрузке.xlsx"));
         XSSFWorkbook workbook = new XSSFWorkbook(stream);
         XSSFSheet sheet = workbook.getSheetAt(0);
 
-        writer.write("insert into object (objectid,name,categoryid,isdeleted) values ("+objectid+",'Общероссийский классификатор видов экономической деятельности ОКВЭД 2 (ОК 029-2014 (КДЕС Ред. 2))', 1, false);\n");
+        writer.write("insert into object (objectid,name,categoryid,isdeleted) values ("+objectid+",'Общероссийский классификатор видов экономической деятельности ОКВЭД 2 (ОК 029-2014 (КДЕС Ред. 2))', 1558425, false);\n");
         writer.write("\n");
 
-        writer.write("insert into classifier (classifierid,codeen,coderu,categoryid,status) values ("+classifierid+", 'ОКВЭД-2', 'ОКВЭД-2', 1,0);\n");
+        writer.write("insert into classifier (classifierid,codeen,coderu,categoryid,status) values ("+classifierid+", 'ОКВЭД-2', 'ОКВЭД-2', 1558425,0);\n");
         writer.write("\n");
 
         String[] attributes_rus = {"Примечание", "Раздел", "Индекс"};
