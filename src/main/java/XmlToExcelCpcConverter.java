@@ -19,11 +19,15 @@ public class XmlToExcelCpcConverter {
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(xmlFile);
         doc.getDocumentElement().normalize();
+<<<<<<< HEAD
 
         NodeList classificationItems = doc.getElementsByTagName("classification-item");
         for (int i = 0; i < classificationItems.getLength(); i++) {
             NodeList itemChildren = classificationItems.item(0).getChildNodes();
             
         }
+=======
+        
+>>>>>>> Test-child-for
     }
 }
