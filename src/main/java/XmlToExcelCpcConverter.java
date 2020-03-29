@@ -29,9 +29,9 @@ public class XmlToExcelCpcConverter {
     private final static int CODE = 0;
     private final static int PARENT = 1;
     private final static int TITLE = 2;
-    private final static int LEVEL = 3;
+    private final static int CONCORDANT = 3;
     private final static int SORTKEY = 4;
-    private final static int CONCORDANT = 5;
+    private final static int LEVEL = 5;
     private final static int WARNING = 6;
     private final static int NOTE = 7;
 
@@ -69,9 +69,6 @@ public class XmlToExcelCpcConverter {
         cell.setCellValue("TITLE");
         cell.setCellStyle(style);
 
-        cell = row.createCell(LEVEL);
-        cell.setCellValue("LEVEL");
-        cell.setCellStyle(style);
 
         cell = row.createCell(SORTKEY);
         cell.setCellValue("SORTKEY");
@@ -79,6 +76,10 @@ public class XmlToExcelCpcConverter {
 
         cell = row.createCell(CONCORDANT);
         cell.setCellValue("CONCORDANT");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(LEVEL);
+        cell.setCellValue("LEVEL");
         cell.setCellStyle(style);
 
         cell = row.createCell(WARNING);
@@ -107,15 +108,24 @@ public class XmlToExcelCpcConverter {
                 code = ""; title = ""; warning = ""; note = ""; level = ""; sortKey = ""; concordant = "";
                 Element item = (Element) classificationItems.item(i);
                 level = item.getAttribute("level");
+                if (level.equals("3")||level.equals("6")) {
+                    continue;
+                }
                 sortKey = item.getAttribute("sort-key");
                 concordant = item.getAttribute("ipc-concordant");
-                Element itemParent = (Element) item.getParentNode();
-                parent = itemParent.getAttribute("sort-key");
+                if(level.equals("4")||level.equals("7")) {
+                    Element itemParent = (Element) item.getParentNode().getParentNode();
+                    parent = itemParent.getAttribute("sort-key");
+                } else {
+                    Element itemParent = (Element) item.getParentNode();
+                    parent = itemParent.getAttribute("sort-key");
+                }
 
-                System.out.println("=======");
-                System.out.println("PARENT: "+parent);
-                System.out.println(i+"~"+sortKey+"~"+level+"~"+concordant);
-                System.out.println("=======");
+
+//                System.out.println("=======");
+//                System.out.println("PARENT: "+parent);
+//                System.out.println(i+"~"+sortKey+"~"+level+"~"+concordant);
+//                System.out.println("=======");
 
                 NodeList itemChildren = classificationItems.item(i).getChildNodes();
                 for (int j = 0; j<itemChildren.getLength(); j++){
@@ -144,16 +154,18 @@ public class XmlToExcelCpcConverter {
                         } else if (itemChildren.item(j).getNodeName()=="notes-and-warnings") {
                             NodeList noteChildren = itemChildren.item(j).getChildNodes();
                             for (int k = 0; k < noteChildren.getLength(); k++) {
-                                Element noteChildrenElement = (Element) noteChildren.item(k);
-                                if (noteChildrenElement.getAttribute("type").equals("warning")){
-                                    NodeList noteChildrenSub = noteChildrenElement.getChildNodes();
-                                    for (int l = 0; l < noteChildrenSub.getLength(); l++) {
-                                        warning = warning + (noteChildrenSub.getLength()>1 ? String.valueOf(l+1)+". " : "") + noteChildrenSub.item(l).getTextContent()+"\n";
-                                    }
-                                } else {
-                                    NodeList noteChildrenSub = noteChildrenElement.getChildNodes();
-                                    for (int l = 0; l < noteChildrenSub.getLength(); l++) {
-                                        note = note + (noteChildrenSub.getLength()>1 ? String.valueOf(l+1)+". " : "") + noteChildrenSub.item(l).getTextContent()+"\n";
+                                if (noteChildren.item(k).getNodeType()==Node.ELEMENT_NODE){
+                                    Element noteChildrenElement = (Element) noteChildren.item(k);
+                                    if (noteChildrenElement.getAttribute("type").equals("warning")){
+                                        NodeList noteChildrenSub = noteChildrenElement.getChildNodes();
+                                        for (int l = 0; l < noteChildrenSub.getLength(); l++) {
+                                            warning = warning + (noteChildrenSub.getLength()>1 ? String.valueOf(l+1)+". " : "") + noteChildrenSub.item(l).getTextContent()+"\n";
+                                        }
+                                    } else {
+                                        NodeList noteChildrenSub = noteChildrenElement.getChildNodes();
+                                        for (int l = 0; l < noteChildrenSub.getLength(); l++) {
+                                            note = note + (noteChildrenSub.getLength()>1 ? String.valueOf(l+1)+". " : "") + noteChildrenSub.item(l).getTextContent()+"\n";
+                                        }
                                     }
                                 }
                             }
@@ -170,13 +182,10 @@ public class XmlToExcelCpcConverter {
                 cell.setCellValue(code);
 
                 cell = row.createCell(PARENT);
-                cell.setCellValue("");
+                cell.setCellValue(parent);
 
                 cell = row.createCell(TITLE);
                 cell.setCellValue(title);
-
-                cell = row.createCell(LEVEL);
-                cell.setCellValue(level);
 
                 cell = row.createCell(SORTKEY);
                 cell.setCellValue(sortKey);
@@ -184,19 +193,22 @@ public class XmlToExcelCpcConverter {
                 cell = row.createCell(CONCORDANT);
                 cell.setCellValue(concordant);
 
+                cell = row.createCell(LEVEL);
+                cell.setCellValue(level);
+
                 cell = row.createCell(WARNING);
                 cell.setCellValue(warning);
 
                 cell = row.createCell(NOTE);
                 cell.setCellValue(note);
 
-                System.out.println(code+"\n"+title+"\n"+note+"\n"+warning);
+//                System.out.println(code+"\n"+title+"\n"+note+"\n"+warning);
             }
         }
 
 
 
-        FileOutputStream fileOut = new FileOutputStream("F:\\Excel-Out.xlsx");
+        FileOutputStream fileOut = new FileOutputStream("F:\\CPC-C.xlsx");
         workbook.write(fileOut);
         workbook.close();
         fileOut.close();
